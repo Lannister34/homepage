@@ -39,7 +39,7 @@
             <div class="row">
               <div class="five wide center aligned column">
                 <div class="avatar-wrapper">
-                  <img class="avatar" src="./assets/images/avatar.png" rel:animated_src="./assets/images/avatar.gif" rel:auto_play="0" />
+                  <img class="avatar" src="./assets/images/avatar.png" alt="My avatar" />
                 </div>
               </div>
               <div class="eleven wide column">
@@ -219,13 +219,13 @@
                     <audio data-icon="greetings" src="./assets/sounds/greetings.mp3">
                     </audio>
                     <img data-icon="greetings" src="./assets/images/audio_icon.svg" alt="Greetings, travaler!" width="15" height="15" />
-                    PSYCHOLOGY YOUTUBE <span class="nowrap">TO MAKE VIDEOS</span> NB FABLES <span class="nowrap">SMETANA BAND</span> <strike>WORK</strike> RELAX ALLIANCE DISCUSS ANIMALS MAGIC
+                    PSYCHOLOGY YOUTUBE <span class="nowrap">TO MAKE VIDEOS</span> NB FABLES <span class="nowrap">SMETANA BAND</span> <span style="text-decoration: line-through;">>WORK</span> RELAX ALLIANCE DISCUSS ANIMALS MAGIC
                   </p>
                 </section>
                 <section>
                   <h3>Dislikes&#x1f61e;</h3>
                   <p class="tags small">
-                    ALCOHOL HYPOCRISY CAPITALISM MUSSELS <strike>MYSELF</strike> COOK <span class="nowrap">AGRESSIVE FOREIGN POLICY</span> POETRY SYLVANAS
+                    ALCOHOL HYPOCRISY CAPITALISM MUSSELS <<span style="text-decoration: line-through;">>MYSELF</span> COOK <span class="nowrap">AGRESSIVE FOREIGN POLICY</span> POETRY SYLVANAS
                     <audio data-icon="sylvanas" src="./assets/sounds/sylvanas.mp3">
                     </audio>
                     <img data-icon="sylvanas" src="./assets/images/audio_icon.svg" alt="It was a mistake" width="15" height="15" />
@@ -259,31 +259,43 @@
         </div>
       </article>
     </main>
-    <script type="text/javascript" src="./assets/scripts/libgif.js">
-    </script>
-    <script>
+    <footer>
+      <strong>Thank you!</strong>
+    </footer>
+    <script type="text/javascript">
+     (function() {
+       // Avatar
 
-    // Avatar
+       let libgif = document.createElement('script');
 
-      let avatar = new SuperGif({
-            gif: document.querySelector('.avatar'),
-            loop_mode: false,
-            show_progress_bar: false
-          });
+       libgif.setAttribute('src', './assets/scripts/libgif.js');
+       libgif.setAttribute('async', true);
 
-      avatar.load(function() {
-        avatar.get_canvas().addEventListener('mouseenter', function() {
-          avatar.pause();
-          avatar.play();
-        });
+       libgif.addEventListener('load', function() {
+         let avatar = new SuperGif({
+               gif: document.querySelector('.avatar'),
+               loop_mode: false,
+               show_progress_bar: false,
+               auto_play: false,
+               src: './assets/images/avatar.gif'
+             });
 
-        avatar.get_canvas().addEventListener('mouseleave', function() {
-          avatar.pause();
-          avatar.playBack();
-        });
-      });
+         avatar.load(function() {
+           avatar.get_canvas().addEventListener('mouseenter', function() {
+             avatar.pause();
+             avatar.play();
+           });
 
-    // Sounds
+           avatar.get_canvas().addEventListener('mouseleave', function() {
+             avatar.pause();
+             avatar.playBack();
+           });
+         });
+       });
+
+       document.head.appendChild(libgif);
+
+      // Sounds
 
       let soundNodes = window.Array.prototype.slice.call(document.querySelectorAll('[data-icon]')),
           soundObjects = {};
@@ -310,7 +322,7 @@
             }, false);
       };
 
-    // Articles
+      // Articles
 
       let vkAPI = document.createElement('script');
 
@@ -326,7 +338,8 @@
         node.innerHTML = '<em>Enable VPN to see it!';
       });
 
-      document.body.appendChild(vkAPI);
+      document.head.appendChild(vkAPI);
+     })();
     </script>
   </body>
 </html>

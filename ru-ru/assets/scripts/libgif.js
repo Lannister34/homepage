@@ -452,6 +452,7 @@
         var progressBarHeight = (options.hasOwnProperty('progressbar_height') ? options.progressbar_height : 25);
         var progressBarBackgroundColor = (options.hasOwnProperty('progressbar_background_color') ? options.progressbar_background_color : 'rgba(255,255,255,0.4)');
         var progressBarForegroundColor = (options.hasOwnProperty('progressbar_foreground_color') ? options.progressbar_foreground_color : 'rgba(255,0,22,.8)');
+        var gifSrc = (options.hasOwnProperty('src') ? options.src : null);
 
         var clear = function () {
             transparency = null;
@@ -998,7 +999,8 @@
                 h.send();
             },
             load: function (callback) {
-                this.load_url(gif.getAttribute('rel:animated_src') || gif.src,callback);
+              console.log(gifSrc);
+                this.load_url(gifSrc || gif.getAttribute('rel:animated_src') || gif.src,callback);
             },
             load_raw: function(arr, callback) {
                 if (!load_setup(callback)) return;
