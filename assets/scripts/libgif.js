@@ -999,7 +999,6 @@
                 h.send();
             },
             load: function (callback) {
-              console.log(gifSrc);
                 this.load_url(gifSrc || gif.getAttribute('rel:animated_src') || gif.src,callback);
             },
             load_raw: function(arr, callback) {
