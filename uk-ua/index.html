@@ -39,7 +39,7 @@
             <div class="row">
               <div class="five wide center aligned column">
                 <div class="avatar-wrapper">
-                  <img class="avatar" src="./uk-ua/assets/images/avatar.png" rel:animated_src="assets/images/avatar.gif" rel:auto_play="0" />
+                  <img class="avatar" src="./uk-ua/assets/images/avatar.png" alt="Мій аватар" />
                 </div>
               </div>
               <div class="eleven wide column">
@@ -217,13 +217,13 @@
                     <audio data-icon="greetings" src="./uk-ua/assets/sounds/greetings.mp3">
                     </audio>
                     <img data-icon="greetings" src="./uk-ua/assets/images/audio_icon.svg" alt="Greetings, travaler!" width="15" height="15" />
-                    ПСИХОЛОГІЯ YOUTUBE <span class="nowrap">РОБИТИ ВІДЕО</span> NB FABLES <span class="nowrap">СМЕТАНА BAND</span> <strike>РОБОТА</strike> ВІДПОЧИНОК АЛЬЯНС ОБГОВОРЕННЯ ТВАРИНИ МАГІЯ
+                    ПСИХОЛОГІЯ YOUTUBE <span class="nowrap">РОБИТИ ВІДЕО</span> NB FABLES <span class="nowrap">СМЕТАНА BAND</span> <span style="text-decoration: line-through;">РОБОТА</span> ВІДПОЧИНОК АЛЬЯНС ОБГОВОРЕННЯ ТВАРИНИ МАГІЯ
                   </p>
                 </section>
                 <section>
                   <h3>Не подобається&#x1f61e;</h3>
                   <p class="tags small">
-                    АЛКОГОЛЬ ЛИЦЕМІРСТВО КАПІТАЛІЗМ МІДІЇ <strike>Я</strike> ГОТУВАТИ <span class="nowrap">АГРЕСИВНА ЗОВНІШНЯ ПОЛІТИКА</span> ПОЕЗІЯ СІЛЬВАНА
+                    АЛКОГОЛЬ ЛИЦЕМІРСТВО КАПІТАЛІЗМ МІДІЇ <span style="text-decoration: line-through;">Я</span> ГОТУВАТИ <span class="nowrap">АГРЕСИВНА ЗОВНІШНЯ ПОЛІТИКА</span> ПОЕЗІЯ СІЛЬВАНА
                     <audio data-icon="sylvanas" src="./uk-ua/assets/sounds/sylvanas.mp3">
                     </audio>
                     <img data-icon="sylvanas" src="./uk-ua/assets/images/audio_icon.svg" alt="It was a mistake" width="15" height="15" />
@@ -257,31 +257,43 @@
         </div>
       </article>
     </main>
-    <script type="text/javascript" src="./uk-ua/assets/scripts/libgif.js">
-    </script>
-    <script>
+    <footer>
+      <strong>Спасибі!</strong>
+    </footer>
+    <script type="text/javascript">
+     (function() {
+       // Avatar
 
-    // Avatar
+       let libgif = document.createElement('script');
 
-      let avatar = new SuperGif({
-            gif: document.querySelector('.avatar'),
-            loop_mode: false,
-            show_progress_bar: false
-          });
+       libgif.setAttribute('src', './uk-ua/assets/scripts/libgif.js');
+       libgif.setAttribute('async', true);
 
-      avatar.load(function() {
-        avatar.get_canvas().addEventListener('mouseenter', function() {
-          avatar.pause();
-          avatar.play();
-        });
+       libgif.addEventListener('load', function() {
+         let avatar = new SuperGif({
+               gif: document.querySelector('.avatar'),
+               loop_mode: false,
+               show_progress_bar: false,
+               auto_play: false,
+               src: './assets/images/avatar.gif'
+             });
 
-        avatar.get_canvas().addEventListener('mouseleave', function() {
-          avatar.pause();
-          avatar.playBack();
-        });
-      });
+         avatar.load(function() {
+           avatar.get_canvas().addEventListener('mouseenter', function() {
+             avatar.pause();
+             avatar.play();
+           });
 
-    // Sounds
+           avatar.get_canvas().addEventListener('mouseleave', function() {
+             avatar.pause();
+             avatar.playBack();
+           });
+         });
+       });
+
+       document.head.appendChild(libgif);
+
+      // Sounds
 
       let soundNodes = window.Array.prototype.slice.call(document.querySelectorAll('[data-icon]')),
           soundObjects = {};
@@ -308,7 +320,7 @@
             }, false);
       };
 
-    // Articles
+      // Articles
 
       let vkAPI = document.createElement('script');
 
@@ -324,7 +336,8 @@
         node.innerHTML = '<em>Увімкни VPN, щоб побачити!';
       });
 
-      document.body.appendChild(vkAPI);
+      document.head.appendChild(vkAPI);
+     })();
     </script>
   </body>
 </html>
